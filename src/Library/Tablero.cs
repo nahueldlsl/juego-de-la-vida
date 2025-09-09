@@ -25,4 +25,5 @@ public class Tablero
     {
         matriz[x, y] = cambio;
     }
+
 }

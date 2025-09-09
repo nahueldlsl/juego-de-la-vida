@@ -30,7 +30,8 @@ namespace Library;
                 }
 
                 Console.WriteLine(s.ToString());
-
+                Next_gen nextGen = new Next_gen();
+                nextGen.CalcularGen(board);
                 Thread.Sleep(300);
             }
         }
