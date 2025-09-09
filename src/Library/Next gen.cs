@@ -2,12 +2,13 @@ namespace Library;
 
 public class Next_gen
 {
-    public void CalcularGen(Tablero board)
+    public void CalcularGen(Tablero matriz)
     {
-        int boardWidth = board.ancho;
-        int boardHeight = board.alto;
+        Tablero gameBoard = matriz;
+        int boardWidth = matriz.Ancho;
+        int boardHeight = matriz.Alto;
 
-        bool[,] cloneboard = new bool[boardWidth, boardHeight];
+        Tablero cloneboard = new Tablero(boardWidth, boardHeight);
         for (int x = 0; x < boardWidth; x++)
         {
             for (int y = 0; y < boardHeight; y++)
@@ -17,27 +18,27 @@ public class Next_gen
                 {
                     for (int j = y-1;j<=y+1;j++)
                     {
-                        if(i>=0 && i<boardWidth && j>=0 && j < boardHeight && board[i,j])
+                        if(i>=0 && i<boardWidth && j>=0 && j < boardHeight && gameBoard[i,j])
                         {
                             aliveNeighbors++;
                         }
                     }
                 }
-                if(board[x,y])
+                if(gameBoard[x,y])
                 {
                     aliveNeighbors--;
                 }
-                if (board[x,y] && aliveNeighbors < 2)
+                if (gameBoard[x,y] && aliveNeighbors < 2)
                 {
                     //Celula muere por baja población
                     cloneboard[x,y] = false;
                 }
-                else if (board[x,y] && aliveNeighbors > 3)
+                else if (gameBoard[x,y] && aliveNeighbors > 3)
                 {
                     //Celula muere por sobrepoblación
                     cloneboard[x,y] = false;
                 }
-                else if (!board[x,y] && aliveNeighbors == 3)
+                else if (!gameBoard[x,y] && aliveNeighbors == 3)
                 {
                     //Celula nace por reproducción
                     cloneboard[x,y] = true;
@@ -45,10 +46,10 @@ public class Next_gen
                 else
                 {
                     //Celula mantiene el estado que tenía
-                    cloneboard[x,y] = board[x,y];
+                    cloneboard[x,y] = gameBoard[x,y];
                 }
             }
         }
-        board = cloneboard;
+        gameBoard = cloneboard;
     }
 }
