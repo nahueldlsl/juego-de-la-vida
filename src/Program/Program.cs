@@ -1,12 +1,38 @@
 ﻿using System;
+using System.Text;
+using System.Threading;
 
 namespace Ucu.Poo.GameOfLife
 {
-    class Program
+    public class Impresor
     {
-        static void Main(string[] args)
+        public void Mostrar(Tablero tablero)
         {
-            Console.WriteLine("Hello World!");
+            while (true)
+            {
+                Console.Clear();
+                StringBuilder s = new StringBuilder();
+                for (int y = 0; y < tablero.alto; y++)
+                {
+                    for (int x = 0; x < tablero.ancho; x++)
+                    {
+                        if (tablero[x, y])
+                        {
+                            s.Append("|X|");
+                        }
+                        else
+                        {
+                            s.Append("___");
+                        }
+                    }
+
+                    s.Append("\n");
+                }
+
+                Console.WriteLine(s.ToString());
+
+                Thread.Sleep(300);
+            }
         }
     }
 }
